@@ -9,20 +9,7 @@ p <- ggplot(data = gapminder,
 p
 p + geom_point()
 
-
-
-
-
-
-
-
-
 p + geom_smooth()
-
-
-
-
-
 
 p + geom_point() + geom_smooth()
 
@@ -35,19 +22,9 @@ p + geom_point() +
     geom_smooth(method = "gam") +
     scale_x_log10()
 
-
-
-
-
-
-
 p + geom_point() + 
     geom_smooth(method = "gam") +
     scale_x_log10(labels = scales::dollar)
-
-
-
-
 
 p <- ggplot(data = gapminder,
             mapping = aes(x = gdpPercap,
@@ -60,22 +37,23 @@ p + geom_point() +
 p <- ggplot(data = gapminder,
             mapping = aes(x = gdpPercap,
                           y = lifeExp))
-            
-p + geom_point(color="purple") +
-    geom_smooth(color = "orange") +
+
+p + geom_point(color="#FFCC00CC") +
+    geom_smooth(color = "#0000FF") +
     scale_x_log10()
 
 
 p <- ggplot(data = gapminder, 
-            mapping = aes(x = gdpPercap, y=lifeExp))
-p + geom_point(alpha = 0.3) +
-    geom_smooth(method = "gam") +
+            mapping = aes(x = gdpPercap, 
+                          y = lifeExp,
+                          color = continent))
+p + geom_point(alpha = 0.5) +
     scale_x_log10(labels = scales::dollar) +
-    labs(x = "GDP Per Capita", 
-         y = "Life Expectancy in Years",
-         title = "Economic Growth and Life Expectancy",
-         subtitle = "Data points are country-years",
-         caption = "Source: Gapminder.")
+    theme_classic()
+
+ggsave("mywork.png", width=8, height=5)
+
+ggsave("mywork.pdf", width=8, height=5)
 
 p <- ggplot(data = gapminder, 
             mapping = aes(x = gdpPercap, y = lifeExp))
@@ -86,3 +64,17 @@ p + geom_point(mapping = aes(color = continent)) +
 ggsave(filename = "my_figure.png")
 ggsave(filename = "my_figure.pdf")
 getwd()
+
+install.packages("HistData")
+library(HistData)
+data(GaltonFamilies)
+mydf <- GaltonFamilies
+
+plot(mydf$midparentHeight, 
+     mydf$childHeight,
+     col="skyblue")
+
+model <- lm(childHeight ~ midparentHeight,
+            data = mydf)
+abline(model, col="orange", lwd=3)
+
