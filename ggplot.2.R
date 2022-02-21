@@ -1,5 +1,7 @@
 library(tidyverse)
 
+windows(width=7, height=5)
+
 p <- ggplot(mpg, aes(displ, hwy)) +
     geom_point(aes(color = class)) +
     geom_smooth(se = FALSE)
@@ -13,7 +15,6 @@ p + labs(title = "Fuel efficiency .vs. engine size",
 p + labs(x = "Engine displacement (L)",
          y = "Highway fuel economy (mpg)", 
          color = "Car Type")
-
 
 best_in_class <- mpg %>%
     group_by(class) %>%
@@ -63,6 +64,19 @@ ggsave("myplot.pdf")
 ggsave(file="myplot.png", 
        width = 1920, height = 1080, units = "px")
 
+install.packages("gapminder")
+library(gapminder)
+str(gapminder)
 
+?gapminder
 
-
+ggplot(gapminder, 
+       aes(gdpPercap, lifeExp, color = continent)) +
+    geom_point(alpha = 0.5) +
+    scale_x_log10(labels = scales::dollar) +
+    labs(title = "GapMinder: GDP .vs. Life Expectancy",
+         x = "GDP per capita", y = "Life Expectancy") +
+    theme(plot.title = element_text(size=18,
+                                    face="bold",
+                                    color="steelblue"))
+    

@@ -46,7 +46,7 @@ barplot(table(daegu$sector))
 
 library(ggmap)
 
-ggmap_key <- "AIzaSyBQ5nfmMz9aH6E5otBzBfhGi5illur3q4M"
+ggmap_key <- "your API key here"
 register_google(ggmap_key)
 
 ## geocode 가져오기
