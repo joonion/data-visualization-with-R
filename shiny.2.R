@@ -15,7 +15,6 @@ server <- function(input, output, session) {
             scale_x_log10(labels = scales::dollar) +
             theme_classic()
     }, res = 96)
-    
     output$data <- renderTable({
         req(input$plot_click)
         nearPoints(gapminder, input$plot_click)
